@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>canvas-count-down</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <canvas id="canvas"  style="border: 1px solid #aaa;display: block;margin: 50px auto;"></canvas>
+
+  <script>
+    window.onload = function () {
+      var canvas = document.getElementById('canvas')
+
+      canvas.width = 1024
+			canvas.height = 768
+      
+      if ( canvas.getContext('2d') ) {
+        var context = canvas.getContext('2d')
+        
+        //使用context绘制
+        context.beginPath()
+        context.moveTo(100,100)       //设置起点
+        context.lineTo(700,700)       //设置直线画到（x,y）
+        context.lineTo(100,700)
+        context.lineTo(100,100)
+        context.closePath()
+
+        context.fillStyle = 'rgb(2, 100, 30)'
+        context.fill()                 // 填充色彩
+
+        context.lineWidth = 5          //定义线条宽度 
+        context.strokeStyle = "purple" //定义外边框颜色
+
+        context.stroke()               //stroke(笔画的意思)，用于绘制线条
+
+        //开始绘制第二个图形
+        context.beginPath()            // 重新绘制，否则会被后面覆盖
+        context.moveTo(200,100)
+        context.lineTo(700,600)
+        context.closePath()
+
+        context.strokeStyle= "black"
+        context.stroke()
+        
+      } else {
+        alert('当前浏览器不支持Canvas，请更换浏览器后再试')
+      }
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>小球落地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin:50px auto;"></canvas>
+
+  <script>
+    /**
+     *  x、y: 坐标位置
+     *  r：半径
+     *  g：重力加速度
+     *  vx：x方向的速度
+     *  vy：y方向的速度
+     *  color：颜色
+     */
+    var ball = { x:512, y:100, r:20, g:2, vx:-4, vy:-10, color:'#005588' }
+
+    window.onload = function () {
+      var canvas = document.getElementById('canvas')
+
+      canvas.width = 1024
+      canvas.height = 768
+
+      var context = canvas.getContext("2d")
+      
+      setInterval(function () {
+        render(context)
+        update()
+      }, 50)
+    }
+
+    function update() {
+      ball.x += ball.vx
+      ball.y += ball.vy
+      ball.vy += ball.g
+
+      if (ball.y >= 768 - ball.r) {
+        ball.y = 768-ball.r
+        ball.vy = -ball.vy*0.5
+      }
+    }
+
+    function render( context ) {
+      // 画布的宽高
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height) // 
+      
+      context.fillStyle= ball.color
+      context.beginPath();
+      context.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+      context.closePath();
+      
+      context.fill();
+      
+    }
+  </script>
+</body>
+</html>

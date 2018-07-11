@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>绘制弧线</title>
+</head>
+<body>
+	<!--
+		context.arc(
+			centerx,centery,radius,         圆心x,圆心y,半径
+			startingAngle,endingAngle,      开始弧度值，结束弧度值
+			anticlockwise = false           顺时针/逆时针   不写默认顺时针
+		)
+	-->
+	<canvas id="canvas" style="border: 1px solid #aaa;display: block;margin:50px auto;"></canvas>
+	<script type="text/javascript">
+		window.onload = function(){
+			var canvas = document.getElementById('canvas')
+
+			canvas.width = 1024
+			canvas.height = 768
+
+			var context = canvas.getContext("2d")
+
+			context.lineWidth = 5
+			context.strokeStyle = "#005588"
+
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,60,40,0,2*Math.PI*(i+1)/10)
+				context.closePath()     //closePath每次会把上一次绘制的图形封上
+				context.stroke()
+			}
+
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,180,40,0,2*Math.PI*(i+1)/10)
+				//context.closePath()     
+				context.stroke()
+			}
+
+			//逆时针
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,300,40,0,2*Math.PI*(i+1)/10,true)
+				context.closePath()     //closePath每次会把上一次绘制的图形封上
+				context.stroke()
+			}
+
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,420,40,0,2*Math.PI*(i+1)/10,true)
+				//context.closePath()     
+				context.stroke()
+			}
+
+			context.fillStyle = "purple"
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,540,40,0,2*Math.PI*(i+1)/10)
+				context.closePath()     //closePath每次会把上一次绘制的图形封上
+				
+				context.fill()
+			}
+
+			for(var i=0;i<10;i++){
+				context.beginPath()
+				context.arc(50 +i*100,660,40,0,2*Math.PI*(i+1)/10)
+				                         //closePath对context没有影响
+				context.fill()
+			}
+		}
+	</script>
+</body>
+</html>
