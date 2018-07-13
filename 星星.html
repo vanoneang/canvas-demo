@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>画星星</title>
+</head>
+<body>
+
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+	当前浏览器不支持canvas, 请更换浏览器后再试
+</canvas>
+<script>
+
+	window.onload = function(){
+	
+		var canvas = document.getElementById("canvas");
+		
+		canvas.width = 800;
+		canvas.height = 800;
+		
+		var context = canvas.getContext("2d");
+		
+		context.fillStyle = "black";//设置背景颜色
+    context.fillRect( 0, 0, canvas.width, canvas.height);
+    
+		
+    for( var i = 0; i < 200; i++){
+      //为了使这两百个星星状态有些差异
+      //所以大小，位置， 角度应该有些不同
+      var r = Math.random() * 10 + 10;
+      var x = Math.random() * canvas.width;
+      var y = Math.random() * canvas.height;
+      var a = Math.random() * 360;
+      
+      drawStar( context, x, y, r, r/2.0, a);
+    }
+		
+	
+	}
+	
+	
+	
+
+	
+	
+	 
+	
+	/*
+		正玄sin cos
+	
+	*/
+	function drawStar( cxt, x, y, outerR, innerR, rot ){
+			cxt.beginPath();
+			for( var i = 0; i < 5; i++){
+				cxt.lineTo(Math.cos( (18 + i*72 - rot)/180 * Math.PI) * outerR +x,
+								-Math.sin( (18 + i*72 - rot)/180 * Math.PI) * outerR + y);
+				cxt.lineTo(Math.cos( (54 + i*72 - rot)/180 * Math.PI) * innerR + x,
+								-Math.sin( (54 + i*72 - rot)/180 * Math.PI) * innerR + y);
+			}
+			
+			cxt.closePath();
+			
+			//这部分是进行状太的设置
+			
+			cxt.fillStyle = "#fb3";
+			cxt.strokeStyle = "#fd5";
+			cxt.lineWidth = 3;
+			cxt.lineJoin = "round";
+			
+			cxt.fill();
+			cxt.stroke();
+	}
+	
+</script>
+</body>
+</html>

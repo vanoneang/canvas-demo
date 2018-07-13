@@ -39,9 +39,14 @@
         context.beginPath()            // 重新绘制，否则会被后面覆盖
         context.moveTo(200,100)
         context.lineTo(700,600)
-        context.closePath()
+        // context.closePath()
 
+        context.lineCap='round';       // 如果绘制圆角不能封闭
         context.strokeStyle= "black"
+        
+        
+        context.lineWidth = 50    
+        
         context.stroke()
         
       } else {
