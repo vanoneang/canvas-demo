@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <canvas id="canvas" style="display:block;margin:0 auto;border:1px solid #aaa;">
+    您的浏览器尚不支持canvas
+    </canvas>
+
+    <script>
+        var canvas = document.getElementById("canvas")
+        var context = canvas.getContext("2d")
+        var image = new Image()
+
+        // canvas.width 宽
+        // 宽高比例 3/4
+        window.onload = function(){
+
+            canvas.width = 700
+            canvas.height = 700*4/3
+            
+            image.src = "img.jpg"
+            // 等待图片读取完成
+            image.onload = function(){
+
+                if (image.width > image.height) {
+                    context.drawImage( image, (image.width-3/4*image.height)/2, 0, (3/4*image.height), image.height, 0, 0, canvas.width, canvas.height)   
+                } else {
+                    context.drawImage(image, 0, (image.height-4*image.width/3)/2, image.width, (4*image.width/3), 0, 0, canvas.width, canvas.height)                                       
+                }
+                // // image对象 绘制起始的x、y值
+                // context.drawImage( image , 600, 200, 400, 400, 0,0, canvas.width, canvas.height )
+            }
+
+
+        }
+
+    </script>
+</body>
+</html>
