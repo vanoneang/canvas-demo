@@ -21,7 +21,8 @@
         var offContext = offCanvas.getContext("2d")
 
         var image = new Image()
-        var isMouseDown = false
+        // 是否点击
+        var isMouseDown = false 
         var scale
 
         window.onload = function(){
@@ -34,13 +35,17 @@
 
                 offCanvas.width = image.width
                 offCanvas.height = image.height
+                // 放大尺度
                 scale = offCanvas.width / canvas.width
 
                 context.drawImage( image , 0 , 0 , canvas.width , canvas.height )
                 offContext.drawImage( image , 0 , 0 )
             }
         }
-
+        
+        /**
+        * 文档的x - 画布的x
+        */
         function windowToCanvas( x , y ){
             var bbox = canvas.getBoundingClientRect()
             return {x:x-bbox.left , y:y-bbox.top}
@@ -49,8 +54,10 @@
         canvas.onmousedown = function(e){
             e.preventDefault()
             isMouseDown = true
+            // 文档的坐标值转换成画布的坐标值
             point = windowToCanvas( e.clientX , e.clientY )
             console.log( point.x , point.y )
+            // 绘制放大镜
             drawCanvasWithMagnifier( true , point )
         }
 
@@ -68,13 +75,14 @@
 
         canvas.onmousemove = function(e){
             e.preventDefault()
-            if( isMouseDown == true ){
+            if( isMouseDown === true ){
                 point = windowToCanvas( e.clientX , e.clientY )
                 console.log( point.x , point.y )
                 drawCanvasWithMagnifier( true , point )
             }
         }
-
+        
+        // 绘制放大镜
         function drawCanvasWithMagnifier( isShowMagnifier , point ){
 
             context.clearRect( 0 , 0 , canvas.width , canvas.height )
@@ -83,7 +91,8 @@
                 drawMagnifier( point )
             }
         }
-
+        
+        
         function drawMagnifier( point ){
 
             var mr = 200
